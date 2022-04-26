@@ -17,5 +17,9 @@ router.get('/',(req, res) => {
   res.send(String(captcha.data));
   res.end();
 })
+router.get('/test',(req, res) => {
+  res.cookie('test', "aaa");
+  res.send({status: 200,msg: 'test'})
+})
 
 module.exports = router;

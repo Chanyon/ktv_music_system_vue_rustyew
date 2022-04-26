@@ -7,6 +7,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const cors = require('cors');
 const app = express();
 
 // 配置
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 app.use(passport.initialize());
+app.use(cors());
 // 路由
 const user = require('./service/user');
 app.use("/api/user", user);   // 用户相关路由
@@ -25,7 +27,7 @@ app.use("/api/music", musicRouters);
 const adminRouters = require('./service/admin');
 app.use("/api/admin", adminRouters);
 const safecodeRoute = require('./service/safecode');
-app.use("api/safacode",safecodeRoute);
+app.use("/api/safecode",safecodeRoute);
 
 // 404
 app.get("*",(req, res)=>{
