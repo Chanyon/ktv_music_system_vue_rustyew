@@ -12,13 +12,13 @@
         <el-form-item label="Password" prop="password">
           <el-input type="password" v-model="loginForm.password" placeholder="请输入密码" show-password></el-input>
         </el-form-item>
-        <el-form-item label="Security Code" prop="inputCaptcha">
+        <!-- <el-form-item label="Security Code" prop="inputCaptcha">
           <div class="yzm">
             <el-input style="width:150px;" v-model="inputCaptcha" placeholder="验证码"></el-input>
             <img width="80" style="background:#EEE9E9;margin-left:30px;" ref="captcha" height="32" :src="captchaVal"
               @click="refreshCaptcha">
           </div>
-        </el-form-item>
+        </el-form-item> -->
         <el-form-item>
           <el-button class="login-btn" type="primary" @click="submitForm('loginForm')">Sign in</el-button>
         </el-form-item>
@@ -29,6 +29,8 @@
 
 <script>
 import jwt_decode from "jwt-decode"
+import wsmLoading from "@/utils/wsmLoading"
+import {getLogin} from "@/network/login"
 export default {
   name: "Login",
   data() {
@@ -40,7 +42,7 @@ export default {
       }
     }
     return {
-      inline: true,
+      // inline: true,
       inlinemessages: false,
       loginForm: {
         email: "",
@@ -55,64 +57,68 @@ export default {
           { required: true, message: "密码不能为空", trigger: "blur" },
           { min: 6, max: 16, message: "密码长度在6-16之间", trigger: "blur" }
         ],
-        inputCaptcha: [
-          { required: true, validator: validateCaptcha, trigger: "blur" }
-        ]
+        // inputCaptcha: [
+        //   { required: true, validator: validateCaptcha, trigger: "blur" }
+        // ]
       },
-      inputCaptcha: "",
-      captchaVal: "",
+      // inputCaptcha: "",
+      // captchaVal: "",
     }
   },
   created() {
-    this.getCapt();
+    // this.getCapt();
   },
   methods: {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (!valid) {
-
+          return;
         }
+        wsmLoading.start("正在登录...")
         setTimeout(async () => {
-          if (this.inputCaptcha.toLowerCase() === this.getCookie("captcha")) {
-            const { data: ret } = await this.$http.post("http://localhost:3000/api/admin/account/login", this.loginForm);
+          // if (this.inputCaptcha.toLowerCase() === this.getCookie("captcha")) {
+            const { data: ret } = await getLogin("admin/account/login", this.loginForm);
+            if(ret.status !== 200) return this.$message.error(ret.msg);
             const token = ret.token;
             const decoded = jwt_decode(token);
             window.localStorage.setItem("adminToken", token);
-            this.$store.dispatch("setAdminInfo", decoded);
+            this.$store.dispatch("setAdminInfo", {...decoded});
             this.$store.dispatch("isAdminAuthorization", true);
             this.$message.success(`${decoded.username}登录成功`);
+            wsmLoading.end();
             this.$router.push("/");
-          } else {
-            this.$alert('验证码错误，', '验证失败', {
-              confirmButtonText: '确定',
-              callback: action => {
-                this.$message({
-                  type: 'info',
-                  message: `action: ${action}`
-                });
-              }
-            });
-          }
+          // } else {
+            // this.$alert('验证码错误，请重新输入', '验证失败', {
+            //   confirmButtonText: '确定',
+            //   callback: action => {
+            //     this.$message({
+            //       type: 'info',
+            //       message: `action: ${action}`
+            //     });
+            //   }
+            // });
+          // }
         }, 900);
       })
     },
-    getCookie(cname) {
-      let name = cname + "=";
-      let ca = document.cookie.split(";");
-      for (let i = 0; i < ca.length; i++) {
-        let c = ca[i].trim();
-        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
-      }
-      return "";
-    },
-    refreshCaptcha() {
-      this.getCapt();
-    },
-    async getCapt() {
-      const { data: ret } = await this.$http.get("http://localhost:3000/api/safecode/test");
-      // this.captchaVal = ret;
-      console.log(ret);
-    }
+    // 验证码相关
+    // getCookie(cname) {
+    //   let name = cname + "=";
+    //   let ca = document.cookie.split(";");
+    //   for (let i = 0; i < ca.length; i++) {
+    //     let c = ca[i].trim();
+    //     if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    //   }
+    //   return "";
+    // },
+    // refreshCaptcha() {
+    //   this.getCapt();
+    // },
+    // async getCapt() {
+    //   const { data: ret } = await this.$http.get("http://localhost:3000/api/safecode/test");
+    //   // this.captchaVal = ret;
+    //   console.log(ret);
+    // }
   }
 }
 </script>
@@ -140,7 +146,8 @@ export default {
   }
 
   .form-box {
-    width: 100%;
+    width: 540px;
+    height: auto;
     margin: 0px auto;
     padding: 10px 5px;
     background-color: rgba(255, 255, 255, .9);

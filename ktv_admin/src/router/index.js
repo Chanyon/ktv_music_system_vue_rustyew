@@ -5,7 +5,8 @@ import {LoadingBar} from 'view-design'
 // 路由
 import Home from '@/views/Home'
 import Login from '@/views/Login'
-
+import Index from '@/views/Index'
+import ManageMusic from '@/views/ManageMusic'
 Vue.use(VueRouter)
 
 const routes = [
@@ -22,6 +23,9 @@ const routes = [
     // component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
     component:Home,
     children: [
+      {path:'', redirect:"index"},
+      {path:'index', name:"后台", component:Index},
+      {path:'manage/music',name:"ManageMusic",component:ManageMusic}
     ]
   },
   {
