@@ -6,3 +6,13 @@ export const getAllSongRoute = (route) => {
       method: 'get'
     })
 }
+
+export const searchMusicByName = (route, name) => {
+  return request({
+    url: route,
+    method: 'post',
+    data:{
+      ...name
+    }
+  })
+}

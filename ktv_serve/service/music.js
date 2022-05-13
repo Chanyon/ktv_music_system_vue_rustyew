@@ -46,26 +46,33 @@ router.post("/search/byname", async (req, res) => {
         $options: 'i'
       }
     });
-    if (getSong) {
+    if (getSong.length > 0) {
       return res.send({
         status: 200,
         msg: "获取成功",
         data: getSong
       });
     } else {
-      Music.find({
+      const artist = await Music.find({
           artist: {
             $regex: songName,
             $options: "i"
           }
+        });
+      if(artist.length > 0){
+        res.send({
+          status: 200,
+          msg: "获取成功",
+          data: artist
         })
-        .then(artist => {
-          res.send({
-            status: 200,
-            msg: "获取成功",
-            data: artist
-          })
+      }else{
+        res.send({
+          status: 401,
+          msg: "获取失败",
+          data: ''
         })
+      }
+
     }
   } catch (error) {
 

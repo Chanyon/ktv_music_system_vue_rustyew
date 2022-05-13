@@ -23,3 +23,5 @@ static/poster
 *.njsproj
 *.sln
 *.sw?
+
+./ktv_serve/static
