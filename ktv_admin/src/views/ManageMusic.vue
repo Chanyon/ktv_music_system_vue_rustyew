@@ -146,7 +146,9 @@
 </template>
 
 <script>
-import { getAllSongRoute, searchMusicByName } from "@/network/manage_music.js";
+import { 
+  getAllSongRoute, searchMusicByName,
+  linkMusic, delMusic} from "@/network/manage_music.js";
 export default {
   name: "ManageMusic",
   data() {
@@ -216,6 +218,38 @@ export default {
         (item, idx) => idx < this.paginations.page_size
       );
     },
+    // linkSongs
+    linkSongs(row){
+      this.$confirm(`添加 ${row.songName} (${row.artist}) 歌曲到KTV推荐歌曲里吗? `,'操作提示',{
+        confirmButtonText:'确定',
+        cancelButtonText:'取消',
+        type: 'warning'
+      })
+      .then(async ()=>{
+        const {data:ret} = await linkMusic({s_id:row._id});
+        if(ret.status === 200) {
+          this.$message.success(ret.msg);
+        }else{
+          this.$message.error(ret.msg);
+        }
+      })
+    },
+    // onDeleteSong
+    onDeleteSong(row){
+      this.$confirm(`确定删除 ${row.songName} (${row.artist}) 歌曲吗?不可撤销,是否继续? `,'风险提示',{
+        confirmButtonText:'确定',
+        cancelButtonText:'取消',
+        type: 'warning'
+      }).then(async () => {
+        const {data:ret} = await delMusic(row._id);
+        if(ret.status === 200){
+          this.$message.success(ret.msg);
+          this.getAllSong();
+        }else{
+          this.$message.error(ret.msg);
+        }
+      })
+    }
   },
 };
 </script>
