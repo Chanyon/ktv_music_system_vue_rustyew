@@ -13,11 +13,11 @@ const opts = {
 
 module.exports = (passport) => {
   passport.use(new JwtStrategy(opts,(jwt_payload,done)=>{
-    User.findById(jwt_payload.id).then(user=>{
+    User.findById(jwt_payload._id).then(user=>{
       if(user){
         return done(null,user);
       }else{
-        Admin.findById(jwt_payload.id).then(admin=>{
+        Admin.findById(jwt_payload._id).then(admin=>{
           if(admin){
             return done(null,admin);
           }else{

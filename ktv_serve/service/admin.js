@@ -143,9 +143,9 @@ router.post('/music/edit',passport.authenticate("jwt",{session:false}),async (re
 
 router.post("/music/delete",async (req, res)=>{
   try {
-    const {_id} = req.body;
-    const remove = await Music.findOneAndRemove({_id});
-    if(remove){
+    const {id} = req.body;
+    const remove = await Music.findOneAndRemove({_id:id});
+    if(remove !== null){
       res.send({status:200,msg:"删除成功"});
     }else{
       res.send({status:412,msg:"删除失败"});
@@ -155,15 +155,18 @@ router.post("/music/delete",async (req, res)=>{
   }
 })
 // admin收藏歌曲
-router.post("/adminlike/add",passport.authenticate("jwt",{session:false}),async (req, res)=>{
+router.post("/adminlike/add",async (req, res)=>{
   try {
-    const {s_id} = req.body;
-    const isLike = await AdminLike.findOne({s_id});
-    if(isLike){
+    const {s_id:id} = req.body;
+    const isLike = await AdminLike.findOne({s_id:id});
+    if(isLike !== null) {
       return res.send({status:412,msg:"收藏已存在"})
     }else{
-      const newLike = new AdminLike.create({s_id});
-      if(newLike){
+      const likeSongId = {
+        s_id:id,
+      }
+      const newLike = await AdminLike.create(likeSongId);
+      if(newLike !== null){
         return res.send({status:200,msg:"收藏成功"});
       }
     }
@@ -173,7 +176,7 @@ router.post("/adminlike/add",passport.authenticate("jwt",{session:false}),async 
 })
 
 // 获取所有歌曲
-router.get("adminlike/all", passport.authenticate("jwt",{session:false}),async (req, res)=>{
+router.get("adminlike/all",passport.authenticate("jwt",{session:false}),async (req, res)=>{
   try {
     const allMusic = await Music.find();
     const allAdminLikeMusic = await AdminLike.find();
@@ -191,7 +194,7 @@ router.get("adminlike/all", passport.authenticate("jwt",{session:false}),async (
   }
 })
 // 通过id删除收藏的歌曲
-router.post("/adminlike/del",passport.authenticate("jwt",{session:false}),async (req, res)=>{
+router.post("/adminlike/del",async (req, res)=>{
   try {
     const delAdLike = await AdminLike.findByIdAndRemove({s_id:req.body._id});
     if(delAdLike){
