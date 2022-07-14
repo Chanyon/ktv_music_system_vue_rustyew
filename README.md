@@ -3,7 +3,7 @@
 
 # 原项目地址
 ```
-//https://github.com/Peachick/ktv-select_music-system/blob/master/index.js
+https://github.com/Peachick/ktv-select_music-system/blob/master/index.js
 
 ```
 # install
