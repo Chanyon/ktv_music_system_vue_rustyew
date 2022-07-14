@@ -27,6 +27,7 @@ const musicModel = mongoose.Schema({
     type:String
   },
   style: {
+    require:true,
     type:String
   },
   playcount: {

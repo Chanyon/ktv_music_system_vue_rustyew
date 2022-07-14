@@ -26,12 +26,32 @@ export const linkMusic = (id) => {
     }
   })
 }
+export const editMusic = (editForm) => {
+  return request({
+    url: 'admin/music/edit',
+    method: 'post',
+    data:{
+      ...editForm
+    }
+  })
+}
+
 export const delMusic = (id) => {
   return request({
     url: 'admin/music/delete',
     method: 'post',
     data:{
       id
+    }
+  })
+}
+
+export const addMusic = (formData) => {
+  return request({
+    url: 'admin/music/add',
+    method: 'post',
+    data:{
+      ...formData
     }
   })
 }

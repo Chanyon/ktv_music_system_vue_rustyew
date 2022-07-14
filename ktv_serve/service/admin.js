@@ -105,8 +105,8 @@ router.post("/music/add", (req, res) => {
       }
     })
 });
-// 编辑歌曲
-router.post('/music/edit',passport.authenticate("jwt",{session:false}),async (req, res) => {
+// 编辑歌曲,passport.authenticate("jwt",{session:false}),
+router.post('/music/edit',async (req, res) => {
   const {
     _id,
     songName,

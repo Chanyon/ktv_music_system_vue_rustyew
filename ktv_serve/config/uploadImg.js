@@ -12,7 +12,8 @@ module.exports = (req,res) => {
   });
 
   form.parse(req,(err,fields,files) => {
-    let {filepath,size,mimetype} = files.someExpressFiles;
+    let {filepath,size,mimetype} = files.file;
+    // console.log(files.file.filepath);
     if(err) {
       return res.status(500).json({status:500,msg:"服务器内部错误"});
     }

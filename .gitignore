@@ -8,6 +8,8 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+static/music
+static/poster
 dist
 dist-ssr
 *.local
@@ -23,5 +25,3 @@ static/poster
 *.njsproj
 *.sln
 *.sw?
-
-./ktv_serve/static

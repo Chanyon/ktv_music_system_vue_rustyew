@@ -13,7 +13,7 @@ module.exports = (req,res) => {
   });
 
   form.parse(req,(err,fields,files) => {
-    let {filepath,size,mimetype} = files.someExpressFiles;
+    let {filepath,size,mimetype} = files.file;
     if(err) {
       return res.status(500).json({status:500,msg:"服务器内部错误"});
     }
@@ -36,7 +36,7 @@ module.exports = (req,res) => {
     let songName = `${time}_${num}.${extName}`;
     let newPath = form.uploadDir + "/" + songName;
     let oldPath = filepath;
-    console.log(newPath,oldPath);
+    // console.log(newPath,oldPath);
     fs.rename(oldPath,newPath,(err)=>{
       if(err){
         return res.status(500).json({status:500,msg:"音频上传失败"});
