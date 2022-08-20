@@ -34,7 +34,7 @@
           v-if="toListenPoster"
           @click.native="operaMusic"
           size="lager"
-          style="margin-right: 40px"
+          style="margin-right: 40px;border: 1px solid brown;"
         ></Avatar>
         <Button type="primary" @click="addDialog.show = true">
           添加歌曲
@@ -587,7 +587,8 @@ export default {
 
   .listen-poster {
     cursor: pointer;
-    animation: poster 15s linear infinite;
+    animation: poster 500ms linear infinite;
+    transition: rotate 250ms;
   }
   @keyframes poster {
     from {

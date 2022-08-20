@@ -6,7 +6,7 @@ export function request(config){
     timeout: 6000
   });
   instance.interceptors.request.use(config =>{
-    let token = window.localStorage.getItem('token');
+    let token = window.localStorage.getItem('adminToken');
     config.headers.Authorization = `Bearer ${token}`;
     return config;
   },err =>{

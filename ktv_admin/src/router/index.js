@@ -7,6 +7,7 @@ import Home from '@/views/Home'
 import Login from '@/views/Login'
 import Index from '@/views/Index'
 import ManageMusic from '@/views/ManageMusic'
+import AdminLike from '@/views/AdminLike'
 Vue.use(VueRouter)
 
 const routes = [
@@ -21,7 +22,8 @@ const routes = [
     children: [
       {path:'', redirect:"index"},
       {path:'index', name:"后台", component:Index},
-      {path:'manage/music',name:"ManageMusic",component:ManageMusic}
+      {path:'manage/music',name:"ManageMusic",component:ManageMusic},
+      {path:'music/likes',name:"AdminLike",component:AdminLike}
     ]
   },
   {
@@ -43,6 +45,7 @@ const router = new VueRouter({
 router.beforeEach((to,from,next) =>{
   LoadingBar.start();
   next();
+  setTimeout(() => LoadingBar.finish(), 2000);
 })
 
 export default router
