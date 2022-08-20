@@ -176,14 +176,15 @@ router.post("/adminlike/add",async (req, res)=>{
 })
 
 // 获取所有歌曲
-router.get("adminlike/all",passport.authenticate("jwt",{session:false}),async (req, res)=>{
+// passport.authenticate("jwt",{session:false}),
+router.get("/adminlike/all",async (req, res)=>{
   try {
     const allMusic = await Music.find();
     const allAdminLikeMusic = await AdminLike.find();
     let ret = [];
     allMusic.forEach(music =>{
       allAdminLikeMusic.forEach(like_music =>{
-        if(music._id === like_music.s_id){
+        if(music['_id'] == like_music['s_id']){
           ret.push(music);
         }
       });
@@ -196,18 +197,20 @@ router.get("adminlike/all",passport.authenticate("jwt",{session:false}),async (r
 // 通过id删除收藏的歌曲
 router.post("/adminlike/del",async (req, res)=>{
   try {
-    const delAdLike = await AdminLike.findByIdAndRemove({s_id:req.body._id});
+    const delAdLike = await AdminLike.findOneAndRemove({s_id: req.body['_id']});
     if(delAdLike){
       return res.send({status:200,msg:"删除成功"});
     }else{
       return res.send({status:412,msg:"删除失败"});
     }
   } catch (error) {
+    console.log(error);
     return res.send({status:500,msg:"删除失败"});
   }
 })
 // search music by id,待优化
-router.post("/adminlike/search",passport.authenticate("jwt",{session:false}),async (req, res)=>{
+// passport.authenticate("jwt",{session:false}),
+router.post("/adminlike/search",async (req, res)=>{
   try {
     const songName = req.body.searchName.toLowerCase().trim();
     const searchMusicAll = await Music.find();
@@ -218,8 +221,8 @@ router.post("/adminlike/search",passport.authenticate("jwt",{session:false}),asy
     }
     searchMusicAll.forEach(music=>{
       adminlikeMusic.forEach(like_music=>{
-        if(music._id === like_music.s_id){
-          !music.songName.toLowerCase().includes(songName) ? flag = true : ret.push(like_music);
+        if(music._id == like_music.s_id){
+          !music.songName.toLowerCase().includes(songName) ? flag = true : ret.push(music);
           if(flag){
             !music.artist.includes(songName) ? flag=false : ret.push(music);
           }

@@ -35,7 +35,7 @@ router.post("/login",async (req, res)=>{
         };
         jwt.sign(rule,jwt_key,(err,token)=>{
           if(err){
-              return res.send({status:500,msg:"账号或密码错误"});            
+            return res.send({status:500,msg:"账号或密码错误"});            
           }else{
             return res.send({status:200,msg:"登录成功",token:token});
           }
