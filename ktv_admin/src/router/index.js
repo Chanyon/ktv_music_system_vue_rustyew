@@ -8,6 +8,9 @@ import Login from '@/views/Login'
 import Index from '@/views/Index'
 import ManageMusic from '@/views/ManageMusic'
 import AdminLike from '@/views/AdminLike'
+import UserService from '@/views/UserService'
+import Order from '@/views/Order'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -23,7 +26,10 @@ const routes = [
       {path:'', redirect:"index"},
       {path:'index', name:"后台", component:Index},
       {path:'manage/music',name:"ManageMusic",component:ManageMusic},
-      {path:'music/likes',name:"AdminLike",component:AdminLike}
+      {path:'music/likes',name:"AdminLike",component:AdminLike},
+      {path:'user/service',name:"UserService",component:UserService},
+      {path:'allorders',name:"Order",component:Order}
+
     ]
   },
   {

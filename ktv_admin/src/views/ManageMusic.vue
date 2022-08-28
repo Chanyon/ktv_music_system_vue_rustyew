@@ -317,10 +317,10 @@
       :modal-append-to-body="false"
       width="700px"
     >
-      <p slot="header">
+      <!-- <p slot="header">
         <Icon type="ios-musical-notes"></Icon>
         <span>点击试听</span>
-      </p>
+      </p> -->
       <div v-if="toListen">
         <div style="width: 100%">
           <el-table :data="allSongs" height="300" style="width: 100%">
