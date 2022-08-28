@@ -17,7 +17,7 @@
           <DropdownItem @click.native="goIndex">你好，{{ adminInfo.username }}</DropdownItem>
           <DropdownItem @click.native="goManageMusic">歌曲管理</DropdownItem>
           <DropdownItem @click.native="goAdminLikes">推荐歌曲</DropdownItem>
-          <DropdownItem @click.native="goUser_service">开机服务</DropdownItem>
+          <DropdownItem @click.native="goUserService">开机服务</DropdownItem>
           <DropdownItem @click.native="allorders">订单查询</DropdownItem>
           <DropdownItem @click.native="logout">退出登录</DropdownItem>
         </DropdownMenu>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'Nav',
   data() {
@@ -35,7 +36,9 @@ export default {
       theme: "dark",
       nowTime: "",
       avatar: "../assets/logo.png",
-      adminInfo:{}
+      adminInfo:{
+        username: "admin",
+      }
     }
   },
   computed: {
@@ -51,8 +54,8 @@ export default {
     allorders() {
       this.$router.push("/admin/allorders");
     },
-    goUser_service() {
-      this.$router.push("/admin/user_service");
+    goUserService() {
+      this.$router.push("/admin/user/service");
     },
     goManageMusic() {
       this.$router.push("/admin/manage/music");
