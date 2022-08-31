@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import {LoadingBar} from 'view-design'
 
-// 路由
+// 组件
 import Home from '@/views/Home'
 import Login from '@/views/Login'
 import Index from '@/views/Index'
@@ -50,8 +50,8 @@ const router = new VueRouter({
 
 router.beforeEach((to,from,next) =>{
   LoadingBar.start();
-  next();
   setTimeout(() => LoadingBar.finish(), 2000);
+  next();
 })
 
 export default router

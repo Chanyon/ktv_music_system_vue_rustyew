@@ -36,7 +36,7 @@
             </div>
             <div>
               <Icon type="logo-bitcoin" />
-              金额：<span style="padding: 0px 2px;color:#19be6b;font-weight:700;">{{ card.money }}</span>
+              金额：<span style="padding: 0px 2px;color:#19be6b;font-weight:700;">{{ card.totalMoney }}</span>
             </div>
             <div>
               <Icon type="ios-copy" />
@@ -64,7 +64,7 @@ export default {
       card: {
         account: "11111",
         password: "",
-        money: 0,
+        totalMoney: 0,
         order_id: "",
         currentTime: "",
         flag: false,
@@ -78,8 +78,8 @@ export default {
       // 略过密码验证
       const time = new Date();
       this.ruleForm.order_id = time.getTime() + `${Math.floor(Math.random() * 10000)}`;
-      this.ruleForm.startTime = time.getUTCDate();
-      this.ruleForm.endTime = new Date(this.timeLong * 60 * 60 * 1000 + new Date(time).getTime());
+      this.ruleForm.startTime = time.toLocaleString();
+      this.ruleForm.endTime = new Date(this.timeLong * 60 * 60 * 1000 + new Date(time).getTime()).toLocaleString();
 
       const { data: ret } = await createAccount("admin/account/new", this.ruleForm);
       if (ret.status !== 200) {
