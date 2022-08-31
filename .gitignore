@@ -8,13 +8,12 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-static/music
-static/poster
 dist
 dist-ssr
+target
 *.local
-static/music
-static/poster
+ktv_serve/static/music/
+ktv_serve/static/poster/
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
