@@ -17,7 +17,7 @@ const AdminLike = require('../dbModel/adminLike');
 // 
 const uploadMusic = require("../config/uploadMusic");
 const uploadImg = require("../config/uploadImg");
-const newaccount = require("../config/newaccount")();
+const account = require("../config/newaccount");
 const { route } = require("./music");
 
 
@@ -237,12 +237,12 @@ router.post("/adminlike/search",async (req, res)=>{
 
 // 创建用户账号和密码
 router.post("/account/new",async (req, res)=>{
-
+  const newaccount = account();
   const orderInfo = {
     account:newaccount.account,
     password:newaccount.password,
     order_id:req.body.order_id,
-    money: req.body.totalMoney
+    totalMoney: req.body.totalMoney
   };
   const user = {
     order_id:req.body.order_id,
@@ -251,7 +251,7 @@ router.post("/account/new",async (req, res)=>{
     totalMoney: req.body.totalMoney,
     account:orderInfo.account,
     password:orderInfo.password,
-    publicpwd:orderInfo.publicpwd
+    publicpwd:orderInfo.password
   };
   try {
     const newUser = await UserOrOrders.create(user);

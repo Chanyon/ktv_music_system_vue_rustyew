@@ -14,7 +14,7 @@ const userModel = mongoose.Schema({
     require:true,
     type:String
   },
-  money: {
+  totalMoney: {
     require:true,
     type:String
   },
