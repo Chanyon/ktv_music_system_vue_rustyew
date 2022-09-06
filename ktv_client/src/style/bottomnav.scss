@@ -1,0 +1,141 @@
+.bottom-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // background-color: brown;
+  perspective: 1200px;
+  .m-container{
+    width: 80px;
+    height: 100px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    padding: 0px 40px;
+    background-image: linear-gradient(141deg,rgb(173, 38, 38) 0%,rgb(204, 30, 30) 75%);
+    transform: rotateX(30deg);
+}
+  .inner-box {
+    width: 80%;
+    height: 100px;
+    position: relative;
+    z-index: 4;
+    background-color: transparent;
+    display: flex;
+
+    .left {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .home,
+      .selected,
+      .addvolume,
+      .reducevolume {
+        height: 100%;
+        flex: 1;
+        font-size: 24px;
+        text-align: center;
+        color: rgb(196, 196, 26);
+
+        div {
+          font-size: 20px;
+        }
+
+        cursor: pointer;
+      }
+
+      .selected,
+      .selected,
+      .addvolume,
+      .reducevolume {
+        color: rgb(219, 217, 217);
+
+        &:hover {
+          color: rgb(196, 196, 26);
+        }
+      }
+    }
+
+    .middle {
+      flex: 1;
+      padding: 3px 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        margin-right: 5px;
+        width: 100px;
+        height: 100px;
+        border-radius: 5px;
+        filter: blur(1px);
+        z-index: 2;
+      }
+
+      .control-btn {
+        width: 400px;
+        background-color: rgba(0, 0, 0, .2);
+
+        .prev-btn,
+        .play,
+        .next-btn {
+          flex: 1;
+          text-align: center;
+          font-size: 24px;
+          line-height: 100px;
+          color: rgb(220, 225, 228);
+          cursor: pointer;
+
+          &:hover {
+            transform: scale(1.02);
+            color: rgb(120, 129, 138);
+          }
+        }
+
+        .prev-btn {
+          text-align: left;
+          padding-left: 10px;
+        }
+
+        .next-btn {
+          text-align: right;
+          padding-right: 10px;
+        }
+      }
+    }
+
+    // 
+    .right {
+      flex: 1;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      .minormax,
+      .single-cycle,
+      .order-cycle,
+      .login {
+        height: 100%;
+        flex: 1;
+        font-size: 50px;
+        text-align: center;
+        color: rgb(35, 14, 153);
+        div {
+          font-size: 24px;
+        }
+        cursor: pointer;
+      }
+
+      .single-cycle,
+      .order-cycle,
+      .minormax {
+        color: rgb(221, 222, 223);
+
+        &:hover {
+          color: rgb(196, 196, 26);
+        }
+      }
+    }
+  }
+
+  // 
+}

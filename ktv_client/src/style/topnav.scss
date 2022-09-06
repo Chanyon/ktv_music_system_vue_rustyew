@@ -1,0 +1,38 @@
+
+.top-nav{
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(141deg,rgb(199, 56, 104) 20%,rgb(210, 60, 147) 50%, rgb(229, 66, 161) 75%);
+  
+  .logo {
+    margin-left: 80px;
+    width: 80px;
+    height: 80px;
+    background-image: url("https://github.com/Peachick/ktv-select_music-system/blob/master/ktv-client/src/assets/image/website-logo.png?raw=true");
+    background-size: 100% 100%;
+  }
+  .playing-name {
+    width: auto;
+    height: 80px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: aliceblue;
+  }
+  .next-name {
+    width: auto;
+    height: 80px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: aliceblue;
+  }
+  .selected-name {
+    width: auto;
+    height: 80px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+    color: aliceblue;
+  }
+}

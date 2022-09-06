@@ -1,0 +1,20 @@
+[package]
+name = "ktv_client"
+version = "0.1.0"
+edition = "2021"
+git = "https://github.com/Chanyon/ktv_music_system_vue_rustyew"
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+yew = "0.19.3"
+yewdux = "0.8"
+gloo-net = "0.2"
+gloo = "0.8"
+serde = { version = "1.0", features = ["derive"] }
+wasm-bindgen-futures = "0.4"
+
+[dependencies.web-sys]
+version = "0.3"
+features = [
+	"HtmlInputElement",
+]

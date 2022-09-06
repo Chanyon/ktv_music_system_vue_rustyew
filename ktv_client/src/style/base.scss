@@ -1,0 +1,25 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+hr{
+  margin: 2px;
+}
+html{
+  width: 100vw;
+  height: 100vh;
+  font-size: 16px;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
